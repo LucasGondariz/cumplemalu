@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Feliz cumple, Malu</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+<link href="https://fonts.googleapis.com/css2?family=Grandstander:wght@500;700;800&family=Patrick+Hand&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #221528; }
+  a { color: #e8b45c; text-decoration: none; }
+  a:hover { color: #f4d08c; }
+  @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+  @keyframes popIn { from { opacity: 0; transform: scale(.82) translateY(16px); } to { opacity: 1; transform: none; } }
+  @keyframes pulseHint { 0%, 100% { opacity: .55; transform: translateY(0); } 50% { opacity: 1; transform: translateY(-2px); } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  @keyframes twinkle { 0%, 100% { opacity: .25; } 50% { opacity: .8; } }
+</style>
+</helmet>
+<div style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 12px; overflow-x: hidden; background: #221528; font-family: 'Grandstander', system-ui, sans-serif;">
+  <div style="position: relative; margin: auto; width: min(1080px, 97vw); height: min(900px, max(92vh, 540px)); border-radius: 30px; overflow: hidden; display: flex; align-items: center; justify-content: center; background: radial-gradient(120% 95% at 50% 6%, #5c3450 0%, #3a2340 48%, #241629 100%); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08), inset 0 -80px 120px -60px rgba(0, 0, 0, .6), 0 40px 80px -24px rgba(0, 0, 0, .75);">
+
+    <div style="position: absolute; inset: 0; pointer-events: none; background-image: radial-gradient(rgba(255, 238, 200, .5) 1px, transparent 1.4px); background-size: 46px 52px; opacity: .18; animation: twinkle 5s ease-in-out infinite;"></div>
+
+    <canvas ref="{{ canvasRef }}" style="position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 5;"></canvas>
+
+    <button onClick="{{ toggleMute }}" style="position: absolute; top: 16px; right: 16px; z-index: 6; border: 1px solid rgba(253, 246, 236, .28); background: rgba(35, 21, 40, .55); color: #f3e6d6; font-family: 'Grandstander', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: .04em; padding: 8px 13px; border-radius: 999px; cursor: pointer; backdrop-filter: blur(6px);" style-hover="background: rgba(200, 85, 111, .55); border-color: rgba(253, 246, 236, .5);">
+      <sc-if value="{{ muted }}" hint-placeholder-val="{{ false }}"><span>♪ música apagada</span></sc-if>
+      <sc-if value="{{ soundOn }}" hint-placeholder-val="{{ true }}"><span>♪ música</span></sc-if>
+    </button>
+
+    <div style="display: flex; align-items: center; justify-content: center; gap: clamp(4px, 1.5vw, 30px); width: 100%; height: 100%; padding: 10px;">
+
+      <div style="display: flex; flex-direction: column; gap: clamp(10px, 3vh, 26px); z-index: 1; margin-inline: clamp(-82px, 32.4vw - 207px, 18px);">
+        <div style="animation: popIn .7s cubic-bezier(.2, .9, .3, 1.3) both; animation-delay: .15s;">
+          <div style="transform: rotate(-6.5deg);">
+            <div style="position: relative; width: clamp(96px, 13vw, 168px); background: #fdf6ec; padding: 8px 8px 28px; border-radius: 4px; animation: bob 6.4s ease-in-out infinite; box-shadow: 0 16px 28px -10px rgba(0, 0, 0, .6), inset 0 1px 0 rgba(255, 255, 255, .9);">
+              <div style="position: absolute; top: -10px; left: 50%; width: 50px; height: 19px; transform: translateX(-50%) rotate(-3deg); background: rgba(232, 180, 92, .45); border-left: 1px dashed rgba(255, 255, 255, .4); border-right: 1px dashed rgba(255, 255, 255, .4); box-shadow: 0 2px 4px rgba(0, 0, 0, .22);"></div>
+              <img src="uploads/Lucas.jpg" alt="Lucas" style="display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 2px;" />
+              <div style="position: absolute; bottom: 5px; left: 0; right: 0; text-align: center; font-family: 'Patrick Hand', cursive; font-size: clamp(11px, 1vw + 6px, 16px); color: #7b5666;">Lucas</div>
+            </div>
+          </div>
+        </div>
+        <div style="animation: popIn .7s cubic-bezier(.2, .9, .3, 1.3) both; animation-delay: .35s;">
+          <div style="transform: rotate(4.5deg);">
+            <div style="position: relative; width: clamp(96px, 13vw, 168px); background: #fdf6ec; padding: 8px 8px 28px; border-radius: 4px; animation: bob 7.2s ease-in-out infinite; animation-delay: .8s; box-shadow: 0 16px 28px -10px rgba(0, 0, 0, .6), inset 0 1px 0 rgba(255, 255, 255, .9);">
+              <div style="position: absolute; top: -10px; left: 50%; width: 50px; height: 19px; transform: translateX(-50%) rotate(4deg); background: rgba(79, 179, 165, .45); border-left: 1px dashed rgba(255, 255, 255, .4); border-right: 1px dashed rgba(255, 255, 255, .4); box-shadow: 0 2px 4px rgba(0, 0, 0, .22);"></div>
+              <img src="uploads/Nubi.jpg" alt="Nubi" style="display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 2px;" />
+              <div style="position: absolute; bottom: 5px; left: 0; right: 0; text-align: center; font-family: 'Patrick Hand', cursive; font-size: clamp(11px, 1vw + 6px, 16px); color: #7b5666;">Nubi</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div ref="{{ wrapRef }}" onClick="{{ toggle }}" style="position: relative; z-index: 3; flex: 0 0 auto; width: min(84vw, 330px); height: calc(2 * clamp(230px, 38vh, 360px) + 4px); perspective: 1600px; cursor: pointer; transform: {{ wrapT }}; transition: transform 1.15s cubic-bezier(.55, .06, .28, 1);">
+
+        <div style="position: absolute; left: 0; right: 0; bottom: 0; height: clamp(230px, 38vh, 360px); border-radius: 4px 12px 12px 4px; background: linear-gradient(178deg, #fffaf1, #f6ead6); box-shadow: 0 26px 44px -18px rgba(0, 0, 0, .7), inset 0 0 0 1px rgba(255, 255, 255, .7); padding: clamp(14px, 2.4vh, 22px) clamp(15px, 2.4vw, 24px); display: flex; flex-direction: column; justify-content: center; overflow: hidden;">
+          <div style="position: absolute; left: 0; top: 0; bottom: 0; width: 14px; background: linear-gradient(90deg, rgba(120, 80, 60, .16), rgba(120, 80, 60, 0));"></div>
+          <sc-if value="{{ open }}" hint-placeholder-val="{{ true }}">
+            <div style="display: flex; flex-direction: column; gap: clamp(7px, 1.3vh, 12px); font-family: 'Patrick Hand', cursive; color: #4d3641; font-size: clamp(13px, 1.15vh + .55vw, 17px); line-height: 1.5; text-wrap: pretty;">
+              <div style="font-family: 'Grandstander', sans-serif; font-weight: 800; font-size: clamp(19px, 2.5vh, 27px); color: #c0475f; line-height: 1.1; animation: fadeUp .6s ease both; animation-delay: .75s;">Para Malu <span style="font-family: 'Patrick Hand', cursive; font-weight: 400; color: #e0995c;">oWo</span></div>
+              <p style="margin: 0; animation: fadeUp .6s ease both; animation-delay: .95s;">Espero que te gusten los regalitos que preparamos entre Oni, Nubi y yo con mucho amor.</p>
+              <p style="margin: 0; color: #8a6a76; animation: fadeUp .6s ease both; animation-delay: 1.15s;">(en realidad no ayudaron tanto y pisaron todos los envoltorios).</p>
+              <p style="margin: 0; font-size: 1.18em; color: #c0475f; animation: fadeUp .6s ease both; animation-delay: 1.35s;">Te amo O_ó!!!!!!</p>
+              <p style="margin: 2px 0 0; align-self: flex-end; font-size: 1.1em; animation: fadeUp .6s ease both; animation-delay: 1.55s;">Lucas.</p>
+            </div>
+          </sc-if>
+        </div>
+
+        <div ref="{{ flapRef }}" style="position: absolute; left: 0; right: 0; bottom: 0; height: clamp(230px, 38vh, 360px); transform-origin: center top; transform-style: preserve-3d; transform: {{ flapT }}; transition: {{ flapTr }};">
+
+          <div style="position: absolute; inset: 0; backface-visibility: hidden; transform: translateZ(1px); opacity: {{ frontOp }}; transition: opacity .22s linear .48s; border-radius: 4px 12px 12px 4px; overflow: hidden; background: linear-gradient(158deg, #d3627c 0%, #bb475f 58%, #a53a55 100%); box-shadow: 0 24px 40px -16px rgba(0, 0, 0, .7), inset 0 1px 0 rgba(255, 255, 255, .28); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: clamp(4px, 1vh, 10px); padding: 26px 20px;">
+            <div style="position: absolute; inset: 0; background-image: radial-gradient(rgba(240, 200, 130, .55) 1.4px, transparent 1.5px); background-size: 21px 21px; opacity: .45;"></div>
+            <div style="position: absolute; inset: 11px; border: 2px dashed rgba(253, 246, 236, .45); border-radius: 7px;"></div>
+            <div style="position: absolute; left: 0; right: 0; top: 26%; height: clamp(16px, 2.4vh, 22px); background: linear-gradient(180deg, #e8b45c, #d79a41); box-shadow: 0 3px 8px rgba(0, 0, 0, .28);"></div>
+            <div style="position: absolute; top: calc(26% - clamp(9px, 1.4vh, 13px)); left: 50%; transform: translateX(-50%); width: clamp(24px, 3.4vh, 32px); height: clamp(24px, 3.4vh, 32px); border-radius: 50% 6px 50% 6px; background: linear-gradient(140deg, #f2c877, #d79a41); box-shadow: 0 3px 7px rgba(0, 0, 0, .3);"></div>
+            <div style="position: relative; margin-top: clamp(26px, 5vh, 46px); font-weight: 800; font-size: clamp(25px, 4.2vh, 40px); color: #fff6e9; letter-spacing: -.01em; text-shadow: 0 3px 0 rgba(120, 30, 50, .35);">Para Malu</div>
+            <div style="position: relative; font-family: 'Patrick Hand', cursive; font-size: clamp(19px, 2.9vh, 27px); color: #f8dca6;">oWo</div>
+            <div style="position: relative; margin-top: clamp(8px, 1.6vh, 16px); font-family: 'Patrick Hand', cursive; font-size: clamp(13px, 1.7vh, 17px); color: rgba(255, 246, 233, .92); letter-spacing: .06em; animation: pulseHint 2.2s ease-in-out infinite;">tocá para abrir ✧</div>
+          </div>
+
+          <div style="position: absolute; inset: 0; backface-visibility: hidden; transform: rotateX(180deg) translateZ(1px); opacity: {{ backOp }}; transition: opacity .22s linear .48s; border-radius: 12px 4px 4px 12px; overflow: hidden; background: linear-gradient(2deg, #fffaf1, #f4e6cf); box-shadow: 0 -18px 34px -18px rgba(0, 0, 0, .55), inset 0 0 0 1px rgba(255, 255, 255, .7); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: clamp(6px, 1.3vh, 14px); padding: 22px 18px;">
+            <div style="position: absolute; inset: 0; background: repeating-linear-gradient(96deg, rgba(200, 85, 111, .06) 0 12px, transparent 12px 26px);"></div>
+            <div style="position: relative; font-weight: 800; font-size: clamp(21px, 3.3vh, 33px); line-height: 1.02; text-align: center; color: #c0475f; text-shadow: 0 2px 0 rgba(232, 180, 92, .5);">¡Feliz<br />Cumple!</div>
+            <div style="position: relative; font-family: 'Patrick Hand', cursive; font-size: clamp(17px, 2.4vh, 24px); color: #4fb3a5; letter-spacing: .04em;">Malu ♡</div>
+            <div style="position: relative; display: flex; gap: 9px; align-items: flex-end; justify-content: center; margin-top: 4px;">
+              <div style="position: relative; width: 30px; height: 26px; border-radius: 3px; background: #c8556f; box-shadow: 0 5px 9px -4px rgba(0, 0, 0, .45);">
+                <div style="position: absolute; top: 0; bottom: 0; left: 50%; width: 5px; margin-left: -2.5px; background: #e8b45c;"></div>
+                <div style="position: absolute; left: 0; right: 0; top: 7px; height: 4px; background: #e8b45c;"></div>
+              </div>
+              <div style="position: relative; width: 38px; height: 34px; border-radius: 3px; background: #4fb3a5; box-shadow: 0 5px 9px -4px rgba(0, 0, 0, .45);">
+                <div style="position: absolute; top: 0; bottom: 0; left: 50%; width: 5px; margin-left: -2.5px; background: #fdf6ec;"></div>
+                <div style="position: absolute; left: 0; right: 0; top: 9px; height: 4px; background: #fdf6ec;"></div>
+              </div>
+              <div style="position: relative; width: 26px; height: 22px; border-radius: 3px; background: #e8b45c; box-shadow: 0 5px 9px -4px rgba(0, 0, 0, .45);">
+                <div style="position: absolute; top: 0; bottom: 0; left: 50%; width: 4px; margin-left: -2px; background: #a53a55;"></div>
+                <div style="position: absolute; left: 0; right: 0; top: 6px; height: 3px; background: #a53a55;"></div>
+              </div>
+            </div>
+            <div style="position: relative; font-family: 'Patrick Hand', cursive; font-size: clamp(11px, 1.4vh, 14px); color: #9c7c88; letter-spacing: .04em;">de Lucas, Oni y Nubi</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: clamp(10px, 3vh, 26px); z-index: 1; margin-inline: clamp(-82px, 32.4vw - 207px, 18px);">
+        <div style="animation: popIn .7s cubic-bezier(.2, .9, .3, 1.3) both; animation-delay: .25s;">
+          <div style="transform: rotate(6deg);">
+            <div style="position: relative; width: clamp(96px, 13vw, 168px); background: #fdf6ec; padding: 8px 8px 28px; border-radius: 4px; animation: bob 6.8s ease-in-out infinite; animation-delay: .4s; box-shadow: 0 16px 28px -10px rgba(0, 0, 0, .6), inset 0 1px 0 rgba(255, 255, 255, .9);">
+              <div style="position: absolute; top: -10px; left: 50%; width: 54px; height: 19px; transform: translateX(-50%) rotate(3deg); background: rgba(200, 85, 111, .42); border-left: 1px dashed rgba(255, 255, 255, .4); border-right: 1px dashed rgba(255, 255, 255, .4); box-shadow: 0 2px 4px rgba(0, 0, 0, .22);"></div>
+              <img src="uploads/Malu.jpg" alt="Malu" style="display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 2px;" />
+              <div style="position: absolute; bottom: 5px; left: 0; right: 0; text-align: center; font-family: 'Patrick Hand', cursive; font-size: clamp(11px, 1vw + 6px, 16px); color: #c0475f;">Malu ♡</div>
+            </div>
+          </div>
+        </div>
+        <div style="animation: popIn .7s cubic-bezier(.2, .9, .3, 1.3) both; animation-delay: .45s;">
+          <div style="transform: rotate(-5deg);">
+            <div style="position: relative; width: clamp(96px, 13vw, 168px); background: #fdf6ec; padding: 8px 8px 28px; border-radius: 4px; animation: bob 7.6s ease-in-out infinite; animation-delay: 1.2s; box-shadow: 0 16px 28px -10px rgba(0, 0, 0, .6), inset 0 1px 0 rgba(255, 255, 255, .9);">
+              <div style="position: absolute; top: -10px; left: 50%; width: 50px; height: 19px; transform: translateX(-50%) rotate(-5deg); background: rgba(232, 180, 92, .45); border-left: 1px dashed rgba(255, 255, 255, .4); border-right: 1px dashed rgba(255, 255, 255, .4); box-shadow: 0 2px 4px rgba(0, 0, 0, .22);"></div>
+              <img src="uploads/Oni.jpg" alt="Oni" style="display: block; width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 2px;" />
+              <div style="position: absolute; bottom: 5px; left: 0; right: 0; text-align: center; font-family: 'Patrick Hand', cursive; font-size: clamp(11px, 1vw + 6px, 16px); color: #7b5666;">Oni</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <sc-if value="{{ open }}" hint-placeholder-val="{{ false }}">
+      <div onClick="{{ toggle }}" style="position: absolute; bottom: 14px; left: 0; right: 0; z-index: 6; text-align: center; font-family: 'Patrick Hand', cursive; font-size: 14px; color: rgba(253, 246, 236, .6); letter-spacing: .05em; cursor: pointer; animation: fadeUp .8s ease both; animation-delay: 2s;">tocá la tarjeta para cerrarla</div>
+    </sc-if>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;confeti&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:1,&quot;min&quot;:0,&quot;max&quot;:2,&quot;step&quot;:0.1,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Fiesta&quot;},&quot;musica&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Fiesta&quot;},&quot;volumen&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:0.6,&quot;min&quot;:0,&quot;max&quot;:1,&quot;step&quot;:0.05,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Fiesta&quot;}}">
+class Component extends DCLogic {
+  state = { open: false, muted: false, stage: 0 };
+  canvasRef = React.createRef();
+  flapRef = React.createRef();
+  wrapRef = React.createRef();
+  pieces = [];
+
+  componentDidMount() {
+    this.setupCanvas();
+    this.onResize = () => this.setupCanvas();
+    window.addEventListener('resize', this.onResize);
+    this.raf = requestAnimationFrame(this.tick);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.onResize);
+    cancelAnimationFrame(this.raf);
+    clearTimeout(this.loopTimer);
+    clearTimeout(this.stageTimer);
+    if (this.ctx) { try { this.ctx.close(); } catch (e) {} }
+  }
+
+  renderVals() {
+    return {
+      canvasRef: this.canvasRef,
+      flapRef: this.flapRef,
+      wrapRef: this.wrapRef,
+      open: this.state.open,
+      muted: this.state.muted,
+      soundOn: !this.state.muted,
+      frontOp: this.state.open ? 0 : 1,
+      backOp: this.state.open ? 1 : 0,
+      flapT: ['rotateX(0deg)', 'rotateX(-206deg)', 'rotateX(-171deg)'][this.state.stage],
+      flapTr: this.state.stage === 1
+        ? 'transform 1.15s cubic-bezier(.5, .04, .28, 1)'
+        : 'transform .8s cubic-bezier(.33, 1, .68, 1)',
+      wrapT: this.state.open ? 'translateY(0)' : 'translateY(-25%)',
+      toggle: this.toggle,
+      toggleMute: this.toggleMute
+    };
+  }
+
+  toggle = () => {
+    const open = !this.state.open;
+    clearTimeout(this.stageTimer);
+    this.setState({ open, stage: open ? 1 : 0 });
+    if (open) {
+      this.stageTimer = setTimeout(() => this.setState({ stage: 2 }), 1080);
+      this.burst();
+      if (this.props.musica !== false && !this.state.muted) this.startMusic();
+    }
+  };
+
+  toggleMute = (e) => {
+    if (e && e.stopPropagation) e.stopPropagation();
+    const muted = !this.state.muted;
+    this.setState({ muted });
+    if (muted) {
+      if (this.master && this.ctx) {
+        this.master.gain.cancelScheduledValues(this.ctx.currentTime);
+        this.master.gain.setTargetAtTime(0.0001, this.ctx.currentTime, 0.15);
+      }
+    } else if (this.ctx) {
+      this.master.gain.cancelScheduledValues(this.ctx.currentTime);
+      this.master.gain.setTargetAtTime(this.vol(), this.ctx.currentTime, 0.3);
+      if (this.ctx.state === 'suspended') this.ctx.resume();
+    } else if (this.state.open) {
+      this.startMusic();
+    }
+  };
+
+  vol() { return 0.22 * (this.props.volumen != null ? this.props.volumen : 0.6); }
+
+  /* ---------- música: melodía tradicional de cumpleaños, cajita de música ---------- */
+  startMusic() {
+    if (this.ctx) { if (this.ctx.state === 'suspended') this.ctx.resume(); return; }
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return;
+    try {
+      this.ctx = new AC();
+      const master = this.ctx.createGain();
+      master.gain.setValueAtTime(0.0001, this.ctx.currentTime);
+      master.gain.setTargetAtTime(this.vol(), this.ctx.currentTime + 0.2, 0.5);
+      const lp = this.ctx.createBiquadFilter();
+      lp.type = 'lowpass';
+      lp.frequency.value = 4200;
+      master.connect(lp);
+      lp.connect(this.ctx.destination);
+      this.master = master;
+      this.nextStart = this.ctx.currentTime + 0.5;
+      this.loop();
+    } catch (e) { this.ctx = null; }
+  }
+
+  song() {
+    const N = { c: 261.63, d: 293.66, e: 329.63, f: 349.23, g: 392.0, a: 440.0, b: 466.16, C: 523.25 };
+    return [
+      [N.c, .75], [N.c, .25], [N.d, 1], [N.c, 1], [N.f, 1], [N.e, 2],
+      [N.c, .75], [N.c, .25], [N.d, 1], [N.c, 1], [N.g, 1], [N.f, 2],
+      [N.c, .75], [N.c, .25], [N.C, 1], [N.a, 1], [N.f, 1], [N.g, .5], [N.f, 1.5],
+      [N.b, .75], [N.b, .25], [N.a, 1], [N.f, 1], [N.g, 1], [N.f, 2]
+    ];
+  }
+
+  loop() {
+    if (!this.ctx) return;
+    const beat = 60 / 104;
+    let t = Math.max(this.ctx.currentTime + 0.1, this.nextStart || 0);
+    const notes = this.song();
+    for (let i = 0; i < notes.length; i++) {
+      const dur = notes[i][1] * beat;
+      this.playNote(notes[i][0], t, dur);
+      t += dur;
+    }
+    this.nextStart = t + 2.4;
+    const wait = Math.max(500, (this.nextStart - this.ctx.currentTime - 1.2) * 1000);
+    this.loopTimer = setTimeout(() => this.loop(), wait);
+  }
+
+  playNote(f, t, dur) {
+    const ctx = this.ctx;
+    const g = ctx.createGain();
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.linearRampToValueAtTime(0.85, t + 0.014);
+    g.gain.exponentialRampToValueAtTime(0.0008, t + dur * 0.9 + 0.55);
+    g.connect(this.master);
+    const mk = (type, mult, level) => {
+      const o = ctx.createOscillator();
+      o.type = type;
+      o.frequency.value = f * mult;
+      const gg = ctx.createGain();
+      gg.gain.value = level;
+      o.connect(gg);
+      gg.connect(g);
+      o.start(t);
+      o.stop(t + dur + 0.9);
+    };
+    mk('sine', 1, 0.5);
+    mk('triangle', 2, 0.1);
+    mk('sine', 3.01, 0.045);
+  }
+
+  /* ---------- confeti ---------- */
+  setupCanvas() {
+    const c = this.canvasRef.current;
+    if (!c) return;
+    const r = c.getBoundingClientRect();
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    c.width = Math.max(1, Math.round(r.width * dpr));
+    c.height = Math.max(1, Math.round(r.height * dpr));
+    this.cw = r.width;
+    this.ch = r.height;
+    this.c2d = c.getContext('2d');
+    this.c2d.setTransform(dpr, 0, 0, dpr, 0, 0);
+  }
+
+  colors = ['#e8b45c', '#c8556f', '#4fb3a5', '#f7efe2', '#e08a5f', '#ab7fc9'];
+
+  makePiece(fromCenter) {
+    const w = 5 + Math.random() * 8;
+    const p = {
+      x: Math.random() * (this.cw || 600),
+      y: -20 - Math.random() * 60,
+      w: w,
+      h: w * (0.35 + Math.random() * 0.9),
+      rot: Math.random() * 6.28,
+      vr: (Math.random() - 0.5) * 0.18,
+      vy: 0.7 + Math.random() * 1.5,
+      vx: (Math.random() - 0.5) * 0.7,
+      sway: 0.5 + Math.random() * 1.4,
+      ph: Math.random() * 6.28,
+      a: 0.75 + Math.random() * 0.25,
+      k: Math.random() < 0.25 ? 1 : 0,
+      c: this.colors[(Math.random() * this.colors.length) | 0]
+    };
+    if (fromCenter) {
+      p.x = (this.cw || 600) / 2 + (Math.random() - 0.5) * (this.cw || 600) * 0.5;
+      p.y = (this.ch || 600) * 0.42 + (Math.random() - 0.5) * 60;
+      p.vy = -(2.5 + Math.random() * 5);
+      p.vx = (Math.random() - 0.5) * 6;
+    }
+    return p;
+  }
+
+  burst() {
+    const n = Math.round(70 * (this.props.confeti != null ? this.props.confeti : 1));
+    for (let i = 0; i < n; i++) this.pieces.push(this.makePiece(true));
+    for (let i = 0; i < n * 0.5; i++) {
+      const p = this.makePiece(false);
+      p.y = -Math.random() * (this.ch || 600) * 0.9;
+      this.pieces.push(p);
+    }
+  }
+
+  tick = () => {
+    this.raf = requestAnimationFrame(this.tick);
+    const ctx = this.c2d;
+    if (!ctx) return;
+    const inten = this.props.confeti != null ? this.props.confeti : 1;
+    ctx.clearRect(0, 0, this.cw, this.ch);
+    if (this.state.open && inten > 0 && this.pieces.length < 130 * inten && Math.random() < 0.45 * inten) {
+      this.pieces.push(this.makePiece(false));
+    }
+    const keep = [];
+    for (let i = 0; i < this.pieces.length; i++) {
+      const p = this.pieces[i];
+      p.vy = Math.min(p.vy + 0.055, 3.4);
+      p.y += p.vy;
+      p.x += p.vx + Math.sin(p.y * 0.022 + p.ph) * p.sway * 0.5;
+      p.vx *= 0.985;
+      p.rot += p.vr;
+      if (p.y < this.ch + 40) keep.push(p);
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot);
+      ctx.globalAlpha = p.a;
+      ctx.fillStyle = p.c;
+      if (p.k === 1) {
+        ctx.beginPath();
+        ctx.ellipse(0, 0, p.w / 2, p.h / 2, 0, 0, 6.283);
+        ctx.fill();
+      } else {
+        ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+      }
+      ctx.restore();
+    }
+    this.pieces = keep;
+  };
+}
+</script>
+</body>
+</html>
